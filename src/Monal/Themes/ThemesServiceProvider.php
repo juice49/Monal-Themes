@@ -54,6 +54,18 @@ class ThemesServiceProvider extends ServiceProvider {
 				$loader->alias('Themes', 'Monal\Themes\Facades\Themes');
 			}
 		);
+
+		$this->app['theme'] = $this->app->share(
+			function ($app) {
+				return new \Monal\Themes\Libraries\Theme;
+			}
+		);
+		$this->app->booting(
+			function () {
+				$loader = \Illuminate\Foundation\AliasLoader::getInstance();
+				$loader->alias('Theme', 'Monal\Themes\Facades\Theme');
+			}
+		);
 	}
 
 	/**
