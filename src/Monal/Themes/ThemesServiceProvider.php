@@ -20,15 +20,7 @@ class ThemesServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('monal/themes');
-	}
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return	Void
-	 */
-	public function register()
-	{
 		$routes = __DIR__.'/../../routes.php';
 		if (file_exists($routes)){
 			include $routes;
@@ -41,7 +33,15 @@ class ThemesServiceProvider extends ServiceProvider {
 			array(
 			)
 		);
+	}
 
+	/**
+	 * Register the service provider.
+	 *
+	 * @return	Void
+	 */
+	public function register()
+	{
 		// Register Facades
 		$this->app['themes'] = $this->app->share(
 			function ($app) {
