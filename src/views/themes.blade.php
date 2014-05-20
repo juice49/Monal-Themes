@@ -33,7 +33,7 @@
 			<div class="control_block">
 				{{ Form::label('theme', 'Application theme', array('class' => 'label--block')) }}
 				<div class="select__default">
-					{{ Form::select('theme', $themes, Input::has('theme') ? Input::get('theme') : $theme_setting->value(), array('class' => 'select')) }}
+					{{ Form::select('theme', $themes, $theme_setting->value(), array('class' => 'select')) }}
 				</div>
 			</div>
 		</div>
