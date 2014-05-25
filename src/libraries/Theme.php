@@ -28,7 +28,7 @@ class Theme
 	}
 
 	/**
-	 * Return all template files for the currently active theme.
+	 * Return all template files for the active theme.
 	 *
 	 * @return	Array
 	 */

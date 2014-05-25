@@ -3,6 +3,8 @@ namespace Monal\Themes\Libraries;
 /**
  * Themes.
  *
+ * Themes library for working with themes.
+ *
  * @author	Arran Jacques
  */
 

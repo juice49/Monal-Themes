@@ -2,7 +2,8 @@
 /**
  * Themes Controller.
  *
- * Controller for HTTP/S requests for the Themes package.
+ * Controller for HTTP/S requests for the Themes pacakge's admin
+ * pages.
  *
  * @author	Arran Jacques
  */
@@ -22,6 +23,7 @@ class ThemesController extends AdminController
 	 * Constructor.
 	 *
 	 * @param	Monal\GatewayInterface
+	 * @param	SettingsRepository
 	 * @return	Void
 	 */
 	public function __construct(GatewayInterface $system_gateway, SettingsRepository $settings_repo) {
@@ -30,8 +32,8 @@ class ThemesController extends AdminController
 	}
 
 	/**
-	 * Controller for HTTP/S requests for the Themes package’s settings
-	 * page. Mediates requests and outputs the response.
+	 * Controller for HTTP/S requests for the Themes page of the Themes
+	 * package. Mediates the requests and outputs a response.
 	 *
 	 * @return	Illuminate\View\View / Illuminate\Http\RedirectResponse
 	 */
@@ -45,7 +47,7 @@ class ThemesController extends AdminController
 					'theme' => 'required'
 				),
 				array(
-					'theme.required' => 'You need to choose a theme so that it can be saved.',
+					'theme.required' => 'You need to choose a theme for your application.',
 				)
 			);
 			if ($validation->passes()) {
