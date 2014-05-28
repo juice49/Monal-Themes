@@ -28,6 +28,62 @@ class Theme
 	}
 
 	/**
+	 * Return the name of the current theme.
+	 *
+	 * @return	String
+	 */
+	public function name()
+	{
+		$theme_details = include self::path() . '/theme.php';
+		return $theme_details['name'];
+	}
+
+	/**
+	 * Return the author of the current theme.
+	 *
+	 * @return	String
+	 */
+	public function author()
+	{
+		$theme_details = include self::path() . '/theme.php';
+		return $theme_details['author'];
+	}
+
+	/**
+	 * Return the version number of the current theme.
+	 *
+	 * @return	String
+	 */
+	public function version()
+	{
+		$theme_details = include self::path() . '/theme.php';
+		return $theme_details['version'];
+	}
+
+	/**
+	 * Return path the the current theme.
+	 *
+	 * @return	String
+	 */
+	public function path()
+	{
+		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		return base_path() . '/themes/' . $theme_setting->value();
+	}
+
+	/**
+	 * Return URL the the current theme.
+	 *
+	 * @param	String
+	 * @return	String
+	 */
+	public function URL($to = null)
+	{
+		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		return \URL::to('/themes/' . $theme_setting->value() . '/' . trim($to, '/'));
+	}
+
+	/**
 	 * Return all template files for the active theme.
 	 *
 	 * @return	Array
