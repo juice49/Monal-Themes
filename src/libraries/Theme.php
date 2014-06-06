@@ -76,13 +76,15 @@ class Theme
 		$templates = array();
 		$theme_setting = \SettingsRepository::retrieveByKey('theme');
 		$templates_dir = base_path() . '/themes/' . $theme_setting->value() . '/templates';
-		foreach (scandir($templates_dir) as $dir_content) {
-			if (is_file($templates_dir . '/' . $dir_content) AND substr($dir_content, -4) == '.php') {
-				$filename = substr_replace($dir_content, '', -4);
-				if (substr($filename, -6) == '.blade') {
-					$filename = substr_replace($filename, '', -6);
+		if (is_dir($templates_dir)) {
+			foreach (scandir($templates_dir) as $dir_content) {
+				if (is_file($templates_dir . '/' . $dir_content) AND substr($dir_content, -4) == '.php') {
+					$filename = substr_replace($dir_content, '', -4);
+					if (substr($filename, -6) == '.blade') {
+						$filename = substr_replace($filename, '', -6);
+					}
+					$templates[$dir_content] = $filename;
 				}
-				$templates[$dir_content] = $filename;
 			}
 		}
 		return $templates;
