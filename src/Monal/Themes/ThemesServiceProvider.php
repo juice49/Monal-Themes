@@ -44,7 +44,7 @@ class ThemesServiceProvider extends ServiceProvider implements MonalPackageServi
 	 */
 	public function install()
 	{
-		$dir_path = base_path() . '/themes';
+		$dir_path = public_path() . '/themes';
 		if (!is_dir($dir_path)) {
 			mkdir($dir_path);
 		}
