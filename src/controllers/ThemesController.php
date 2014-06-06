@@ -13,25 +13,6 @@ use Monal\GatewayInterface;
 class ThemesController extends AdminController
 {
 	/**
-	 * The system's settings repository. 
-	 *
-	 * @var		 SettingsRepository
-	 */
-	protected $settings_repo;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	Monal\GatewayInterface
-	 * @param	SettingsRepository
-	 * @return	Void
-	 */
-	public function __construct(GatewayInterface $system_gateway, SettingsRepository $settings_repo) {
-		parent::__construct($system_gateway);
-		$this->settings_repo = $settings_repo;
-	}
-
-	/**
 	 * Controller for HTTP/S requests for the Themes page of the Themes
 	 * package. Mediates the requests and outputs a response.
 	 *
@@ -39,7 +20,9 @@ class ThemesController extends AdminController
 	 */
 	public function theme()
 	{
-		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		if (!$theme_setting = SettingsRepository::retrieveByKey('theme')) {
+			$theme_setting = SettingsRepository::newModel();
+		}
 		if ($this->input) {
 			$validation = Validator::make(
 				$this->input,
@@ -52,7 +35,7 @@ class ThemesController extends AdminController
 			);
 			if ($validation->passes()) {
 				$theme_setting->setValue($this->input['theme']);
-				if ($this->settings_repo->write($theme_setting)) {
+				if (SettingsRepository::write($theme_setting)) {
 					$this->system->messages->add(
 						array(
 							'success' => array(
@@ -62,7 +45,7 @@ class ThemesController extends AdminController
 					)->flash();
 					return Redirect::route('admin.settings.themes');
 				} else {
-					$this->system->messages->add($this->settings_repo->messages()->toArray());
+					$this->system->messages->add(SettingsRepository::messages()->toArray());
 				}
 			} else {
 				$this->system->messages->add($validation->messages()->toArray());

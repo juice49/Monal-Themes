@@ -11,23 +11,6 @@ namespace Monal\Themes\Libraries;
 class Theme
 {
 	/**
-	 * The system's settings repository. 
-	 *
-	 * @var		 SettingsRepository
-	 */
-	protected $settings_repo;
-
-	/**
-	 * Constructor.
-	 *
-	 * @return	Void
-	 */
-	public function __construct()
-	{
-		$this->settings_repo = \App::make('SettingsRepository');
-	}
-
-	/**
 	 * Return the name of the current theme.
 	 *
 	 * @return	String
@@ -67,7 +50,7 @@ class Theme
 	 */
 	public function path()
 	{
-		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		$theme_setting = \SettingsRepository::retrieveByKey('theme');
 		return base_path() . '/themes/' . $theme_setting->value();
 	}
 
@@ -79,7 +62,7 @@ class Theme
 	 */
 	public function URL($to = null)
 	{
-		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		$theme_setting = \SettingsRepository::retrieveByKey('theme');
 		return \URL::to('/themes/' . $theme_setting->value() . '/' . trim($to, '/'));
 	}
 
@@ -91,7 +74,7 @@ class Theme
 	public function templates()
 	{
 		$templates = array();
-		$theme_setting = $this->settings_repo->retrieveByKey('theme');
+		$theme_setting = \SettingsRepository::retrieveByKey('theme');
 		$templates_dir = base_path() . '/themes/' . $theme_setting->value() . '/templates';
 		foreach (scandir($templates_dir) as $dir_content) {
 			if (is_file($templates_dir . '/' . $dir_content) AND substr($dir_content, -4) == '.php') {
