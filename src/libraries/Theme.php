@@ -51,7 +51,7 @@ class Theme
 	public function path()
 	{
 		$theme_setting = \SettingsRepository::retrieveByKey('theme');
-		return base_path() . '/themes/' . $theme_setting->value();
+		return public_path() . '/themes/' . $theme_setting->value();
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Theme
 	{
 		$templates = array();
 		$theme_setting = \SettingsRepository::retrieveByKey('theme');
-		$templates_dir = base_path() . '/themes/' . $theme_setting->value() . '/templates';
+		$templates_dir = public_path() . '/themes/' . $theme_setting->value() . '/templates';
 		if (is_dir($templates_dir)) {
 			foreach (scandir($templates_dir) as $dir_content) {
 				if (is_file($templates_dir . '/' . $dir_content) AND substr($dir_content, -4) == '.php') {

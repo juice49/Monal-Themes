@@ -17,7 +17,7 @@ class Themes
 	 */
 	public function available()
 	{
-		$theme_path = base_path() . '/themes';
+		$theme_path = public_path() . '/themes';
 		$themes = array();
 		if (is_dir($theme_path)) {
 			foreach(scandir($theme_path) as $dir_content) {
