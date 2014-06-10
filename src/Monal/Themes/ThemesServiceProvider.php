@@ -136,6 +136,8 @@ class ThemesServiceProvider extends ServiceProvider implements MonalPackageServi
 		$this->app->booting(function () {
 				$loader = \Illuminate\Foundation\AliasLoader::getInstance();
 				$loader->alias('Theme', 'Monal\Themes\Facades\Theme');
+				\View::addLocation(\Theme::path() . '/' . \Config::get('themes::templates.dir'));
+				\View::addNamespace('theme', \Theme::path() . '/' . \Config::get('themes::templates.dir'));
 		});
 	}
 
