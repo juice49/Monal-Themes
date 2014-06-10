@@ -51,7 +51,9 @@ class Theme
 	public function path()
 	{
 		$theme_setting = \SettingsRepository::retrieveByKey('theme');
-		return public_path() . '/themes/' . $theme_setting->value();
+		if($theme_setting) {
+			return public_path() . '/themes/' . $theme_setting->value();
+		}
 	}
 
 	/**
